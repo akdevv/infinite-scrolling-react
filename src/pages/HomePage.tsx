@@ -6,10 +6,13 @@ function HomePage() {
 	const [offset, setOffset] = useState(0);
 	const [loading, setLoading] = useState(false);
 	const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
+	const MAX_OFFSET = 1400;
 
 	// Function to fetch Pokémon with pagination
 	useEffect(() => {
 		const fetchPokemon = async () => {
+			if (offset >= MAX_OFFSET) return;
+
 			setLoading(true);
 			try {
 				const data = await getPokemonList(20, offset);
@@ -31,7 +34,9 @@ function HomePage() {
 				window.innerHeight + document.documentElement.scrollTop >=
 				document.documentElement.offsetHeight - 100
 			) {
-				setOffset((prevOffset) => prevOffset + 20);
+				if (offset + 20 <= MAX_OFFSET) {
+					setOffset((prevOffset) => prevOffset + 20);
+				}
 			}
 		};
 
@@ -44,11 +49,7 @@ function HomePage() {
 	return (
 		<div>
 			<h1>HomePage</h1>
-			<ol
-				style={{
-					lineHeight: "32px",
-				}}
-			>
+			<ol style={{}}>
 				{pokemonList.map((pokemon, index) => (
 					<li key={index}>
 						<p>{pokemon.name}</p>
@@ -56,7 +57,7 @@ function HomePage() {
 						<img
 							src={`https://img.pokemondb.net/artwork/large/${pokemon.name}.jpg`}
 							alt="pokemon image"
-							height={300}
+							height={30}
 						/>
 					</li>
 				))}
