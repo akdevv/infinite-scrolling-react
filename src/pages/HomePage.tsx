@@ -47,22 +47,47 @@ function HomePage() {
 	}, []);
 
 	return (
-		<div>
-			<h1>HomePage</h1>
-			<ol style={{}}>
+		// <div>
+		// 	<h1>HomePage</h1>
+		// 	<ol style={{}}>
+		// 		{pokemonList.map((pokemon, index) => (
+		// 			<li key={index}>
+		// 				<p>{pokemon.name}</p>
+		// 				<p>{pokemon.url}</p>
+		// 				<img
+		// 					src={`https://img.pokemondb.net/artwork/large/${pokemon.name}.jpg`}
+		// 					alt="pokemon image"
+		// 					height={30}
+		// 				/>
+		// 			</li>
+		// 		))}
+		// 	</ol>
+		// 	{loading && <p>Loading more Pokémon...</p>}
+		// </div>
+		<div className="p-4">
+			<h1 className="text-3xl font-bold mb-4 text-center">
+				Pokémon List
+			</h1>
+			<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
 				{pokemonList.map((pokemon, index) => (
-					<li key={index}>
-						<p>{pokemon.name}</p>
-						<p>{pokemon.url}</p>
+					<div
+						key={index}
+						className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out transform hover:scale-105"
+					>
 						<img
 							src={`https://img.pokemondb.net/artwork/large/${pokemon.name}.jpg`}
 							alt="pokemon image"
-							height={30}
+							className="w-full h-32 object-contain mb-4"
 						/>
-					</li>
+						<h2 className="text-xl font-semibold text-center capitalize">
+							{pokemon.name}
+						</h2>
+					</div>
 				))}
-			</ol>
-			{loading && <p>Loading more Pokémon...</p>}
+			</div>
+			{loading && (
+				<p className="text-center mt-4">Loading more Pokémon...</p>
+			)}
 		</div>
 	);
 }
